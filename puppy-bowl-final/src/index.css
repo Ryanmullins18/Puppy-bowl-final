@@ -1,0 +1,64 @@
+body {
+   background-repeat: no-repeat; /* The background image will not repeat. */
+    background-attachment: fixed; /* The background image will not scroll with the page. */
+    background-size: cover; /* The background image will cover the entire area of the element. */
+  }
+
+  .intro {
+    text-align: center; /* The text is centered. */
+    color: #610564; /* The color of the text. */
+    font-size: 24px; /* The size of the text. */
+    padding: 24px; /* The padding around the text. */
+    margin-left: 21px; /* The margin to the left of the text. */
+    padding-right: 100px; /* The padding to the right of the text. */
+    padding-left: 100px; /* The padding to the left of the text. */
+  }
+  
+ .players {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+ 
+  .player-card {
+    width: 360px; 
+    height: 380px; 
+    margin: 10px; 
+    background-color: yellow;
+    border: solid;
+    overflow: hidden; 
+    position: relative; 
+    transition: transform 0.3s; 
+  }
+  
+  .player-image-container {
+  text-align: center;
+    height: 250px;
+    padding: 10px; 
+  }
+  
+
+  .player-image {
+    width: 250px; 
+    height: 200px; 
+
+  }
+  
+  .player-details {
+    position: relative;
+    top:-80px;
+    padding: 10px;flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    color: #000; 
+    font-size: 16px; 
+    text-align: center; 
+  }
+   
+.buttonS{
+  font-size: small;
+  margin-left: 10px;
+}
+  
