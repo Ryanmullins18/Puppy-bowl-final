@@ -10,12 +10,12 @@ import Players from "./components/Players.jsx";
 import SinglePlayer from "./components/SinglePlayer.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
   <React.StrictMode>
     <Provider store={store}>
-    <BrowserRouter>
     <App />
-    </BrowserRouter>
     </Provider>
   </React.StrictMode>,
+</BrowserRouter>
 
 );

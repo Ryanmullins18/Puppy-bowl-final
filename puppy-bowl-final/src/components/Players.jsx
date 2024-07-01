@@ -1,12 +1,34 @@
-import React from "react";
-import { useFetchPlayersQuery } from "../PuppyBowlApi";
+import React, { useState } from "react";
+import { useDeletePlayerMutation, useFetchPlayersQuery } from "../PuppyBowlApi";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const Players = () => {
+  const [players, setPlayer]=useState([])
+  const deletePlayer = id => {
+    fetch("https://fsa-puppy-bowl.herokuapp.com/api/2403-ftb-et-web-PT/players"+`/${id}`
+  , {
+      method: "DELETE",
+    })
+      .then(response => response.json())
+      .then(() => {
+        setPlayer(values => {
+          return values.filter(player => player.id !== id)
+          
+        })
+      })
+  }
+  const [searchParameter, setSearchParameter] = useState("");
   const navigate=useNavigate();
   const { data = {}, error, isLoading } = useFetchPlayersQuery();
-  let message;
   console.log(data)
+
+    
+    
+console.log(searchParameter)
+
+  let message;
+  
   if (isLoading) {
     return <p className="cent">Loading Pups...</p>;
   }
@@ -14,11 +36,32 @@ const Players = () => {
   if (error) {
     console.log(error);
     return <p className="cent">Something went wrong, please try again!</p>;
+   
   }
+  const filterData = searchParameter && data
+  ? data.data.players.filter((player) =>
+      player.name.toLowerCase().includes(searchParameter.toLowerCase())
+      
+    )
+  : data.data.players;
   return (
-    
+    <section>
+      <SearchBar
+        searchParameter={searchParameter}
+        setSearchParameter={setSearchParameter}
+      />
+      {isLoading && <p>{message}</p>}
+      {error && <p>{message}</p>}
+      {players &&
+        players.map((player) => (
+         <div>
+            {player.name}
+          </div>
+        ))}
+   
+
     <div className="players">
-      {data.data.players.map((player) => (
+      {filterData.map((player) => (
         <div key={player.id} className="player-card">
           <div className="player-image-container">
             <img
@@ -37,10 +80,13 @@ const Players = () => {
             <button id="details" onClick={() => {
                 navigate(`/players/${player.id}`);
               }}>Details</button>
+               <button id="delete" onClick={() => {deletePlayer(player.id)
+              }}>Delete</button>
           </div>
         </div>
       ))}
     </div>
+    </section>
   );
 };
 
