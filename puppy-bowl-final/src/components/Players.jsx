@@ -5,19 +5,7 @@ import SearchBar from "./SearchBar";
 
 const Players = () => {
   const [players, setPlayer]=useState([])
-  const deletePlayer = id => {
-    fetch("https://fsa-puppy-bowl.herokuapp.com/api/2403-ftb-et-web-PT/players"+`/${id}`
-  , {
-      method: "DELETE",
-    })
-      .then(response => response.json())
-      .then(() => {
-        setPlayer(values => {
-          return values.filter(player => player.id !== id)
-          
-        })
-      })
-  }
+  const [deletePlayer] = useDeletePlayerMutation();
   const [searchParameter, setSearchParameter] = useState("");
   const navigate=useNavigate();
   const { data = {}, error, isLoading } = useFetchPlayersQuery();

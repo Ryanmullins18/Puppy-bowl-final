@@ -10,13 +10,19 @@ export const puppyBowlApi = createApi({
   endpoints: (builder) => ({
     fetchPlayers: builder.query({
      query: () => "/",
+     providesTags: ["players"],
     }),
+    
+    
+
     addPlayer: builder.mutation({
      query: (body) => ({
         url: "/",
         method: "POST",
         body,
       }),
+      invalidatesTags: ["players"],
+
   }),
     fetchPlayer: builder.query({
       query: (id)=>`/${id}`,
@@ -25,8 +31,8 @@ export const puppyBowlApi = createApi({
       query: (id)=> ({
         url: `/${id}`,
         method: "DELETE",
-        body,
       }),
+      invalidatesTags: ["players"],
   }),
 }),
 });
